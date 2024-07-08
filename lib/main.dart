@@ -136,6 +136,39 @@ mySnackBar(message,context){
            mySnackBar("Proflile", context);
          }
        },
+
+     ),
+     endDrawer: Drawer(
+       
+       child: ListView(
+         children: [
+           
+           DrawerHeader(
+             padding: EdgeInsets.all(0),
+             child: UserAccountsDrawerHeader(
+             
+             decoration: BoxDecoration(color: Colors.black),
+             accountName: Text("Foysal Islam"),
+             accountEmail: Text("foysal@gmail.com"),
+             currentAccountPicture: Image.asset("Image/messi.jpeg"),
+           ),
+           ),
+           ListTile(
+             leading:Icon(Icons.phone),
+             title: Text("Phone"),
+             onTap: (){
+               mySnackBar("phone", context);
+             },
+           ),
+           ListTile(
+               leading: Icon(Icons.home),
+               title: Text("Home"),
+               onTap: (){
+                 mySnackBar("Home On", context);
+               }
+           ),
+         ],
+       ),
      ),
    );
   }
