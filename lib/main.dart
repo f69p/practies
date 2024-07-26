@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget{
 }
 
 class Home extends StatelessWidget{
-  const Home({super.key});
+
 mySnackBar(message,context){
  return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message))
 
@@ -28,6 +28,7 @@ mySnackBar(message,context){
 
   @override
   Widget build(BuildContext context) {
+
    return Scaffold(
 
      appBar:AppBar(
@@ -103,11 +104,30 @@ mySnackBar(message,context){
 
     ),
 
-     body: Center(
-       child: Image(
-         image: AssetImage('Image/messi.jpeg'),
-       ),
-     ),
+body: Column(
+  mainAxisAlignment: MainAxisAlignment.start,
+  children: [
+
+   Padding(padding: EdgeInsets.all(10),
+     child:  TextField(decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'First Name',),),),
+    Padding(padding: EdgeInsets.all(10),
+      child:TextField(decoration: InputDecoration(border:OutlineInputBorder( ),labelText: 'Last Name') ,),),
+    Padding(padding: EdgeInsets.all(10),
+      child:TextField(decoration: InputDecoration(border:OutlineInputBorder( ),labelText: 'Email Address') ,),),
+    Padding(padding: EdgeInsets.all(20),
+      child: ElevatedButton(onPressed: (){},
+        child: Text('submit'),),),
+
+    Padding(padding: EdgeInsets.all(20),child: ElevatedButton(onPressed: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>Activity1()));
+    },
+        child: Text("Go Act 1")),),
+    ElevatedButton(onPressed: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>Activity2()));
+    },
+        child:Text("Go Act 2")),
+  ],
+),
 
      floatingActionButton: FloatingActionButton(
        child:Icon(Icons.add) ,
@@ -171,5 +191,78 @@ mySnackBar(message,context){
        ),
      ),
    );
+  }
+}
+//New Page
+class Activity1 extends StatelessWidget{
+  appBarButtonAction(message,context){
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      appBar: AppBar(
+        backgroundColor: Colors.cyan,
+
+        title: Text("Activity 1"),
+        actions: [
+          IconButton(onPressed: (){
+          appBarButtonAction("Home On", context);
+          }, icon:Icon(Icons.home)),
+        ],
+
+      ),
+      drawer: Drawer(
+        
+        child:ListView(
+          children: [
+            
+            DrawerHeader(
+              padding: EdgeInsets.all(0),
+                child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.black),
+              accountName: Text("Foysal Islam"),
+              accountEmail: Text("foysal@gmail.com"),
+                  currentAccountPicture: Image.asset("Image/messi.jpeg"),
+
+            ),
+
+            ),
+            ListTile(
+              title: Text("Home"),
+              leading: Icon(Icons.home),
+              onTap: (){
+                appBarButtonAction("home Drawer", context);
+              },
+            ),
+          ],
+        ),
+
+      ),
+      body: Center(
+        child: ElevatedButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Activity2()));
+        },child: Text("go act 2"),),
+      ),
+    );
+  }
+}
+
+
+class Activity2 extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.cyan,
+        title: Text("Activity 2"),
+      ),
+      body: Center(
+        child: ElevatedButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Activity1()));
+        },child: Text("go act 1"),),
+      ),
+    );
   }
 }
